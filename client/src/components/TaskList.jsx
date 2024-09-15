@@ -2,8 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import EditTaskForm from "./EditTaskForm";
 
-const TaskList = ({ onClose }) => {
-  const [tasks, setTasks] = useState([]);
+const TaskList = ({tasks, setTasks, fetchTask}) => {
   const [editTask, setEditTask] = useState(null);
   const [editedTask, setEditedTask] = useState({
     title: "",
@@ -11,11 +10,6 @@ const TaskList = ({ onClose }) => {
     dueDate: "",
     category: "",
   });
-
-  const fetchTask = async () => {
-    const response = await axios.get("http://localhost:4444/api/tasks");
-    setTasks(response.data);
-  };
 
   const markComplete = async (id) => {
     const response = await axios.patch(
@@ -155,7 +149,7 @@ const TaskList = ({ onClose }) => {
             editedTask={editedTask}
             handleEditChange={handleEditChange}
             handleSaveEditedTask={handleSaveEditedTask}
-            onClose={onClose}
+            setEditTask={setEditTask}
           />
         </div>
       ) : null}

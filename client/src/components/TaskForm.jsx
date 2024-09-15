@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const TaskForm = ({onClose}) => {
+const TaskForm = ({onClose, fetchTask}) => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -28,6 +28,7 @@ const TaskForm = ({onClose}) => {
         dueDate: "",
         category: "",
       });
+      fetchTask()
     } catch (error) {
       console.log(error);
     }
